@@ -114,25 +114,22 @@ function renderBoard() {
 }
 
 function handleCellClick(event) {
-  let index = event.target.dataset.index;
+  const index = event.currentTarget.dataset.index;
   console.log("entrou no handleCellClick");
-  let currentCard = cardsObjct[index];
+  const currentCard = cardsObjct[index];
 
-  if (gameBoard[index] === "") {
-    let img = event.target.querySelector("img");
-    let imgSrcFileName = img.src.split("/").pop(); // Obtém apenas o nome do arquivo da imagem atual
-    let imageBackFileName = currentCard.imageBack.split("/").pop(); // Obtém apenas o nome do arquivo da imagem de costas
+  if (gameBoard[index] === currentCard.imageBack) {
+    const img = event.currentTarget.querySelector("img");
 
-    if (imgSrcFileName === imageBackFileName) { // Compara os nomes dos arquivos
-      img.src = currentCard.imageFront;
+    if (img.src.includes(currentCard.imageBack)) {
+      img.src = currentCard.imageFront; 
       console.log("entrou on if");
     } else {
-      img.src = currentCard.imageBack;
+      img.src = currentCard.imageBack; 
       console.log("entrou no else");
     }
   }
   console.log("saiu do handleCellClick");
 }
-
 
 renderBoard();
